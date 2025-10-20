@@ -1,0 +1,27 @@
+version: "3.9"
+
+services:
+  app:
+    build: .
+    container_name: go_app
+    ports:
+      - "8080:8080"
+    environment:
+      - PORT=8080
+      - DATABASE_URL=postgres://debdut.saha:vR8@zJ4#tQ9!Lp2x@db:5432/applicationDB?sslmode=disable
+    depends_on:
+      - db
+
+  db:
+    image: postgres:16
+    container_name: go_db
+    restart: always
+    environment:
+      POSTGRES_USER: debdut.saha
+      POSTGRES_PASSWORD: vR8@zJ4#tQ9!Lp2x
+      POSTGRES_DB: applicationDB
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
