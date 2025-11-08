@@ -4,12 +4,15 @@ import (
 	"go-auth/models/users"
 
 	"github.com/gofiber/fiber/v2"
+	"gorm.io/gorm"
 )
 
-type GetUserController struct{}
+type GetUserController struct {
+	db *gorm.DB
+}
 
-func New() *GetUserController {
-	return &GetUserController{}
+func New(db *gorm.DB) *GetUserController {
+	return &GetUserController{db: db}
 }
 
 func (u *GetUserController) Execute(c *fiber.Ctx) error {

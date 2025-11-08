@@ -4,14 +4,17 @@ import (
 	"go-auth/models/auth"
 
 	"github.com/12345debdut/go-config"
+	"gorm.io/gorm"
 
 	"github.com/gofiber/fiber/v2"
 )
 
-type LoginController struct{}
+type LoginController struct {
+	db *gorm.DB
+}
 
-func New() *LoginController {
-	return &LoginController{}
+func New(db *gorm.DB) *LoginController {
+	return &LoginController{db: db}
 }
 
 func (l *LoginController) Execute(c *fiber.Ctx) error {
